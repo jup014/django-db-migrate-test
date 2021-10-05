@@ -1,9 +1,9 @@
 FROM python:3.9
-
-RUN apt update
+ENV PYTHONUNBUFFERED 1
 
 ADD server /server
 COPY server /server
 WORKDIR /server
+
+RUN apt-get update
 RUN pip install -r requirements.txt
-RUN python manage.py makemigrations && python manage.py migrate

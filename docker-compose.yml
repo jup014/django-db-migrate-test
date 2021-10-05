@@ -1,22 +1,24 @@
 version: '2'
 services:
-  db:
-    environment: 
-      - POSTGRES_PASSWORD=password
-    image: postgres:10
+  db2:
+    image: postgres
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
     volumes:
-      - pgdata:/var/lib/postgresql/data
-  server:
+      - pgdata2:/var/lib/postgresql/data
+  server2:
     build: 
       context: ./
       dockerfile: server.Dockerfile
     working_dir: /server
-    command: "python manage.py runserver 0.0.0.0:8080"
+    command: /server/run.sh
     volumes:
       - ./server:/server
     ports:
       - "8080:8080"
     depends_on:
-      - db
+      - db2
 volumes:
-  pgdata:
+  pgdata2:
