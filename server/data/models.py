@@ -4,13 +4,15 @@ import pytz
 import random
 
 from django.db.models.base import Model
+import uuid
 
-# Create your models here.
 class Model1(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, serialize=False, unique=True, null=False)
     time = models.DateTimeField()
     user_id = models.IntegerField()
     steps = models.IntegerField()
     
+        
     def __str__(self):
         return "{} | {} | {} | {}".format(self.id, self.user_id, self.steps, self.time)
     
@@ -64,11 +66,14 @@ class Model1(models.Model):
                 break
             
 
-import uuid
+# class Model3(models.Model):
+#     id = models.UUIDField(primary_key=True, default=uuid.uuid4, serialize=False, unique=True, null=False)
+#     time = models.DateTimeField()
+#     user_id = models.IntegerField()
+#     steps = models.IntegerField()
 
-# Create your models here.
 class Model2(models.Model):
-    id = models.UUIDField(default=uuid.uuid4, serialize=False, editable=False, unique=True, primary_key=True)
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, serialize=False, unique=True, null=False)
     time = models.DateTimeField()
     user_id = models.IntegerField()
     steps = models.IntegerField()
